@@ -1,6 +1,6 @@
+#include <iostream>
 #include "structures.hpp"
 #include "cppitertools/range.hpp"
-#include "iostream"
 
 using namespace std;
 using namespace iter;

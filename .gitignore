@@ -1,4 +1,5 @@
 .vs
-/Debug
-/td2/Debug
-test
+**/Debug
+../td2_partie2/Debug/
+../td2_partie1/Debug/
+../TP2INF1015-3b20f48474aefa242452db60350ac98523c74f7b/Debug

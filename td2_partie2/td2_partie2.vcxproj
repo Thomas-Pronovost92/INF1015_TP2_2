@@ -52,7 +52,6 @@
   <ItemGroup>
     <ClInclude Include="bibliotheque_cours.hpp" />
     <ClInclude Include="debogage_memoire.hpp" />
-    <ClInclude Include="ListeFilms.hpp" />
     <ClInclude Include="structures.hpp" />
     <ClInclude Include="verification_allocation.hpp" />
   </ItemGroup>

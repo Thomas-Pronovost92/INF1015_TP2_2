@@ -3,15 +3,8 @@
 
 #include <string>
 #include <span>
-#include <fstream>
 
 struct Film; struct Acteur; struct ListeActeurs; // Permet d'utiliser les types alors qu'ils seront défini après.
-
-/*
-struct ListeFilms {
-	int capacite, nElements;
-	Film** elements; // Pointeur vers un tableau de Film*, chaque Film* pointant vers un Film.
-};*/
 
 class ListeFilms {
 public:
