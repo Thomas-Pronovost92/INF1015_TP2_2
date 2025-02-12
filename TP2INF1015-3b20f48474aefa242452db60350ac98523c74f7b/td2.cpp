@@ -1,4 +1,12 @@
-﻿#pragma region "Includes"//{
+﻿/**
+* TD2 - partie 1
+* \file   td2.cpp
+* \author Thomas Pronovost et Mikkelsen Bazelais
+* \date   11 février 2025
+* Créé le 1 février 2025
+*/
+
+#pragma region "Includes"//{
 #define _CRT_SECURE_NO_WARNINGS // On permet d'utiliser les fonctions de copies de chaînes qui sont considérées non sécuritaires.
 
 #include "structures.hpp"      // Structures de données pour la collection de films en mémoire.
@@ -258,9 +266,12 @@ int main()
 	cout << ligneDeSeparation << "Les films sont:" << endl;
 	//TODO: Afficher la liste des films.  Il devrait y en avoir 7.
 	afficherListeFilms(listeFilms);
+
 	//TODO: Modifier l'année de naissance de Benedict Cumberbatch pour être 1976 (elle était 0 dans les données lues du fichier).  Vous ne pouvez pas supposer l'ordre des films et des acteurs dans les listes, il faut y aller par son nom.
-	
-	// attention à faire
+	Acteur* acteurBenedictCumberbatch = chercherActeur(listeFilms, "Benedict Cumberbatch");
+	if (acteurBenedictCumberbatch != nullptr) {
+		acteurBenedictCumberbatch->anneeNaissance = 1976;
+	}
 
 	cout << ligneDeSeparation << "Liste des films où Benedict Cumberbatch joue sont:" << endl;
 	//TODO: Afficher la liste des films où Benedict Cumberbatch joue.  Il devrait y avoir Le Hobbit et Le jeu de l'imitation.
