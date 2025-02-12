@@ -78,9 +78,9 @@ Acteur* chercherActeur(const ListeFilms& listeFilms, const string& nomActeur) {
 Acteur* lireActeur(istream& fichier, const ListeFilms& listeFilms)
 {
 	Acteur acteur = {};
-	acteur.nom            = lireString(fichier);
-	acteur.anneeNaissance = lireUint16 (fichier);
-	acteur.sexe           = lireUint8  (fichier);
+	acteur.nom = lireString(fichier);
+	acteur.anneeNaissance = lireUint16(fichier);
+	acteur.sexe = lireUint8(fichier);
 
 	Acteur* acteurPtr = chercherActeur(listeFilms, acteur.nom);
 	if (acteurPtr != nullptr) {
@@ -97,12 +97,12 @@ Acteur* lireActeur(istream& fichier, const ListeFilms& listeFilms)
 Film* lireFilm(istream& fichier, const ListeFilms& listeFilms)
 {
 	Film film = {};
-	film.titre       = lireString(fichier);
+	film.titre = lireString(fichier);
 	film.realisateur = lireString(fichier);
-	film.anneeSortie = lireUint16 (fichier);
-	film.recette     = lireUint16 (fichier);
+	film.anneeSortie = lireUint16(fichier);
+	film.recette = lireUint16(fichier);
 
-	film.acteurs.nElements = lireUint8 (fichier);  //NOTE: Vous avez le droit d'allouer d'un coup le tableau pour les acteurs, sans faire de réallocation comme pour ListeFilms.  Vous pouvez aussi copier-coller les fonctions d'allocation de ListeFilms ci-dessus dans des nouvelles fonctions et faire un remplacement de Film par Acteur, pour réutiliser cette réallocation.
+	film.acteurs.nElements = lireUint8(fichier);  //NOTE: Vous avez le droit d'allouer d'un coup le tableau pour les acteurs, sans faire de réallocation comme pour ListeFilms.  Vous pouvez aussi copier-coller les fonctions d'allocation de ListeFilms ci-dessus dans des nouvelles fonctions et faire un remplacement de Film par Acteur, pour réutiliser cette réallocation.
 	Film* nouveauFilm = new Film(film);
 	nouveauFilm->acteurs.elements = new Acteur * [film.acteurs.nElements];
 	nouveauFilm->acteurs.capacite = film.acteurs.nElements;
@@ -119,7 +119,7 @@ ListeFilms creerListe(const string& nomFichier)
 {
 	ifstream fichier(nomFichier, ios::binary);
 	fichier.exceptions(ios::failbit);
-	
+
 	int nElements = lireUint16(fichier);
 
 	//TODO: Créer une liste de films vide.
@@ -129,7 +129,7 @@ ListeFilms creerListe(const string& nomFichier)
 		Film* filmPtr = lireFilm(fichier, listeFilms); //TODO: Ajouter le film à la liste.à
 		listeFilms.ajouterFilm(filmPtr);
 	}
-	
+
 	return listeFilms; //TODO: Retourner la liste de films.
 }
 
@@ -222,7 +222,7 @@ int main()
 
 	//TODO: La ligne suivante devrait lire le fichier binaire en allouant la mémoire nécessaire.  Devrait afficher les noms de 20 acteurs sans doublons (par l'affichage pour fins de débogage dans votre fonction lireActeur).
 	ListeFilms listeFilms = creerListe("films.bin");
-	
+
 	cout << ligneDeSeparation << "Le premier film de la liste est:" << endl;
 	//TODO: Afficher le premier film de la liste.  Devrait être Alien.
 	afficherListeFilms(listeFilms, 1);

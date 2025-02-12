@@ -65,8 +65,8 @@ void ajouterFilm(ListeFilms& listeFilms, Film* filmPtr) {
 	if (listeFilms.nElements == listeFilms.capacite) {
 		int nouvelleCapacite = 2 * listeFilms.capacite;
 		Film** nouvelleListeFilms = new Film * [nouvelleCapacite];
-		
-		for (int filmIndex: range(0,listeFilms.nElements)) {
+
+		for (int filmIndex : range(0, listeFilms.nElements)) {
 			nouvelleListeFilms[filmIndex] = listeFilms.elements[filmIndex];
 		}
 
@@ -103,7 +103,7 @@ Acteur* chercherActeur(const ListeFilms& listeFilms, const string& nomActeur) {
 		for (Acteur* acteurExistantPtr : spanListeActeur(filmPtr->acteurs)) {
 			if (acteurExistantPtr->nom == nomActeur) {
 				return acteurExistantPtr;
-			}		
+			}
 		}
 	}
 	return nullptr;
@@ -114,9 +114,9 @@ Acteur* chercherActeur(const ListeFilms& listeFilms, const string& nomActeur) {
 Acteur* lireActeur(istream& fichier, ListeFilms& listeFilms)
 {
 	Acteur acteur = {};
-	acteur.nom            = lireString(fichier);
-	acteur.anneeNaissance = lireUint16 (fichier);
-	acteur.sexe           = lireUint8  (fichier);
+	acteur.nom = lireString(fichier);
+	acteur.anneeNaissance = lireUint16(fichier);
+	acteur.sexe = lireUint8(fichier);
 
 	Acteur* acteurPtr = chercherActeur(listeFilms, acteur.nom);
 	if (acteurPtr != nullptr) {
@@ -126,18 +126,19 @@ Acteur* lireActeur(istream& fichier, ListeFilms& listeFilms)
 	nouvelleActeurPtr->joueDans.elements = new Film * [1];
 	nouvelleActeurPtr->joueDans.nElements = 0;
 	nouvelleActeurPtr->joueDans.capacite = 1;
+	cout << acteur.nom << endl;
 	return nouvelleActeurPtr; //TODO: Retourner un pointeur soit vers un acteur existant ou un nouvel acteur ayant les bonnes informations, selon si l'acteur existait déjà.  Pour fins de débogage, affichez les noms des acteurs crées; vous ne devriez pas voir le même nom d'acteur affiché deux fois pour la création.
 }
 
 Film* lireFilm(istream& fichier, ListeFilms& listeFilms)
 {
 	Film film = {};
-	film.titre       = lireString(fichier);
+	film.titre = lireString(fichier);
 	film.realisateur = lireString(fichier);
-	film.anneeSortie = lireUint16 (fichier);
-	film.recette     = lireUint16 (fichier);
+	film.anneeSortie = lireUint16(fichier);
+	film.recette = lireUint16(fichier);
 
-	film.acteurs.nElements = lireUint8 (fichier);  //NOTE: Vous avez le droit d'allouer d'un coup le tableau pour les acteurs, sans faire de réallocation comme pour ListeFilms.  Vous pouvez aussi copier-coller les fonctions d'allocation de ListeFilms ci-dessus dans des nouvelles fonctions et faire un remplacement de Film par Acteur, pour réutiliser cette réallocation.
+	film.acteurs.nElements = lireUint8(fichier);  //NOTE: Vous avez le droit d'allouer d'un coup le tableau pour les acteurs, sans faire de réallocation comme pour ListeFilms.  Vous pouvez aussi copier-coller les fonctions d'allocation de ListeFilms ci-dessus dans des nouvelles fonctions et faire un remplacement de Film par Acteur, pour réutiliser cette réallocation.
 	Film* nouveauFilm = new Film(film);
 	nouveauFilm->acteurs.elements = new Acteur * [film.acteurs.nElements];
 	nouveauFilm->acteurs.capacite = film.acteurs.nElements;
@@ -214,7 +215,7 @@ void afficherListeActeur(const Film& film) {
 }
 
 
-void afficherListeFilms(const ListeFilms& listeFilms, unsigned nFilms=0)
+void afficherListeFilms(const ListeFilms& listeFilms, unsigned nFilms = 0)
 {
 	//TODO: Utiliser des caractères Unicode pour définir la ligne de séparation (différente des autres lignes de séparations dans ce progamme).
 	static const string ligneDeSeparation = "\n\033[35m########################################\033[0m\n";
@@ -250,15 +251,13 @@ int main()
 {
 	bibliotheque_cours::activerCouleursAnsi();  // Permet sous Windows les "ANSI escape code" pour changer de couleurs https://en.wikipedia.org/wiki/ANSI_escape_code ; les consoles Linux/Mac les supportent normalement par défaut.
 
-	//int* fuite = new int; //TODO: Enlever cette ligne après avoir vérifié qu'il y a bien un "Fuite detectee" de "4 octets" affiché à la fin de l'exécution, qui réfère à cette ligne du programme.
-
 	static const string ligneDeSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
 
 	//TODO: Chaque TODO dans cette fonction devrait se faire en 1 ou 2 lignes, en appelant les fonctions écrites.
 
 	//TODO: La ligne suivante devrait lire le fichier binaire en allouant la mémoire nécessaire.  Devrait afficher les noms de 20 acteurs sans doublons (par l'affichage pour fins de débogage dans votre fonction lireActeur).
 	ListeFilms listeFilms = creerListe("films.bin");
-	
+
 	cout << ligneDeSeparation << "Le premier film de la liste est:" << endl;
 	//TODO: Afficher le premier film de la liste.  Devrait être Alien.
 	afficherListeFilms(listeFilms, 1);

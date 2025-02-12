@@ -1,3 +1,11 @@
+/**
+* Implémentation des méthodes de la classe ListeFilms
+* \file   ListeFilms.cpp
+* \author Thomas Pronovost et Mikkelsen Bazelais
+* \date   11 février 2025
+* Créé le 1 février 2025
+*/
+
 #include <iostream>
 #include "structures.hpp"
 #include "cppitertools/range.hpp"
@@ -5,11 +13,11 @@
 using namespace std;
 using namespace iter;
 
-ListeFilms::ListeFilms():
+ListeFilms::ListeFilms() :
 	ListeFilms(1, 0, new Film* [1]) {
 }
 
-ListeFilms::ListeFilms(int capacite, int nElements, Film** elements):
+ListeFilms::ListeFilms(int capacite, int nElements, Film** elements) :
 	capacite_(capacite), nElements_(nElements), elements_(elements) {
 }
 
